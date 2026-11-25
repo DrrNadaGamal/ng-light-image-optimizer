@@ -23,6 +23,6 @@ Upload the folder to `wp-content/plugins/`, activate, open Media > Image Optimiz
 
 ## Honest limits
 - AVIF encoding returned an empty file in the Playground test environment, so AVIF conversion is not verified. WebP is verified.
-- Not yet tested on a live host, with Elementor, or with Bricks.
+- Smoke-tested with real Elementor 4.4.2: an Elementor image widget renders with WebP URLs and srcset, no PHP errors. Not tested in the Elementor editor, with Bricks, or on a live host.
 - Converted files are named `photo.jpg.webp` next to the original. Offloading them to cloud storage is a separate plugin (NG Cloud Offloader).
 - Not for pages cached by a CDN that ignores the Accept header when AVIF is on; turn AVIF off in that case.
