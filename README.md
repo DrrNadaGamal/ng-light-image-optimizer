@@ -22,7 +22,7 @@ Upload the folder to `wp-content/plugins/`, activate, open Media > Image Optimiz
 `tests/run-tests.php` runs inside WordPress (25 checks: conversion of all sizes, size guard, URL and srcset swap, AVIF negotiation, PNG transparency, restore, bulk, delete cleanup, non-image upload, 4-language admin page, input handling). Last run: 25 passed, 0 failed on WordPress (latest) with PHP 8.2 in WordPress Playground.
 
 ## Honest limits
-- AVIF encoding returned an empty file in the Playground test environment, so AVIF conversion is not verified. WebP is verified.
+- AVIF, tested on PHP 8.3 (Playground, GD): real AVIF files were created for sizes up to about 640 px wide and were smaller than WebP; the browser negotiation and fallback to WebP worked, and decoding worked. That encoder wrote empty files for wider images, and the plugin's size guard discarded them, so no broken file was kept. On a normal server with a full AVIF encoder, large sizes should also convert, but that is not verified here.
 - Smoke-tested with real Elementor 4.4.2: an Elementor image widget renders with WebP URLs and srcset, no PHP errors. Not tested in the Elementor editor, with Bricks, or on a live host.
 - Converted files are named `photo.jpg.webp` next to the original. Offloading them to cloud storage is a separate plugin (NG Cloud Offloader).
 - Not for pages cached by a CDN that ignores the Accept header when AVIF is on; turn AVIF off in that case.
